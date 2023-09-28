@@ -9,10 +9,10 @@ Welcome to the "Web Reviews with Advanced TypeScript" project! This project repr
 
 ## Project Structure
 
-**Streamlining with a Configuration File**: Learn how to simplify project management by creating a configuration file.
-**Enhancing Star Ratings with Union Types**: Dive into TypeScript's union types to enhance the display of star ratings.
-**Object-Oriented Approach with Discriminated Union Types**: Explore object-oriented programming using TypeScript's discriminated union types.
-**Improved Encapsulation with Tuple Types**: Elevate code encapsulation and maintainability through the use of tuple types.
-**Future-Proofing with TypeScript Generics**: Prepare your code for future changes and flexibility by incorporating TypeScript generics.
+1.**Streamlining with a Configuration File**: Learn how to simplify project management by creating a configuration file.
+2.**Enhancing Star Ratings with Union Types**: Dive into TypeScript's union types to enhance the display of star ratings.
+3.**Object-Oriented Approach with Discriminated Union Types**: Explore object-oriented programming using TypeScript's discriminated union types.
+4.**Improved Encapsulation with Tuple Types**: Elevate code encapsulation and maintainability through the use of tuple types.
+5.**Future-Proofing with TypeScript Generics**: Prepare your code for future changes and flexibility by incorporating TypeScript generics.
 
 Happy coding!
