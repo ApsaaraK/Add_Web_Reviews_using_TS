@@ -1,121 +1,123 @@
-  body {
-    background-color: #6fa742;
-    overflow-x: hidden;
-  }
-  
-  html {
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-  }
-    
-  .outer-div {
-    margin: auto;
-    max-width: 95%;
-    text-align: left;
-  }
-  
-  .page-frame {
-    margin-top: 2rem;
-    width: 95%;
-  }
-  
+HTML, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+HTML {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.outer-div {
+  margin: auto;
+  max-width: 90%;
+  text-align: left;
+}
+
+.page-frame {
+  margin-top: 2rem;
+  width: 90%;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.park-description {
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.park-image {
+  filter: drop-shadow(0.2rem 0.3rem 0.5rem #555);
+  height: 8rem;
+  width: 8rem;
+  vertical-align: top;
+}
+
+.park-location {
+  color: #5cb85c;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.park-name {
+  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-top: 1rem;
+}
+
+.park-rating {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.park-row {
+  border-bottom: #ddd 1px solid;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.park-side {
+  padding-right: 1rem;
+  vertical-align: top;
+}
+
+.park-table {
+  margin-bottom: 2rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
+.park-table, .park-table td {
+  border-collapse: collapse;
+}
+
+.park-table th, .park-table td {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.reviews-heading {
+  color: #ff9900;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.reviews-hr {
+  border-color: #ccc;
+  margin: 1.5rem 0;
+  width: 50%;
+}
+
+@media only screen and (max-width: 900px) {
   .park-description {
-    color: khaki;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
-    font-weight: bolder;
-    padding-bottom: 1.3rem;
+    font-size: 1.1rem;
   }
-  
+
   .park-image {
-    filter: drop-shadow(0.2rem 0.3rem 0.5rem #446644);
-    height: 8rem;
-    width: 8rem;
-    vertical-align: top;
-  }
-    
-  .park-location {
-    color: greenyellow;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.3rem;
-    font-weight: bold;
+    height: auto;
+    max-width: 100%;
   }
 
   .park-name {
-    color: rgb(239, 245, 244);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.7rem;
-    font-weight: bold;
-    line-height: 90%;
-    margin-bottom: 0.3rem;
-    margin-top: 0.1rem;
+    font-size: 1.8rem;
   }
-  
+
   .park-rating {
-    color: #333333;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
   }
-
-  .park-row {
-    border-bottom: #444444 1px solid;
-  }
-
-  .park-side {
-    padding-right: 2rem;
-    vertical-align: top;
-  }
-  
-  .park-table {
-    margin-bottom: 2rem;
-    padding-right: 2rem;
-    width: 100%;
-  }
-  
-  .park-table, .park-table td {
-    border-collapse: collapse;
-  }
-  
-  .park-table th, .park-table td {
-    padding-bottom: 2.5rem;
-    padding-left: 2rem;
-    padding-top: 2.5rem;
-  }
-  
-  .reviews-heading {
-    color: yellow;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-
-  .reviews-hr {
-    border-color: #888888;
-    margin-left: 0;
-    margin-bottom: 1.3rem;
-    margin-top: 0;     
-    width: 35%; 
-  }
-  
-  /* RESPONSIVE ADJUSTMENTS */
-  
-  @media only screen and (max-width: 900px) {
-  
-    .merchandise-description {
-      font-size: 0.7rem;
-    }
-  
-    .merchandise-image {
-      height: 7.5rem;
-      width: 7.5rem;
-    }
-  
-    .merchandise-name {
-      font-size: 1.7rem;
-    }
-  
-    .merchandise-unit-price {
-      font-size: 1.2rem;
-    }
-  }
-  
+}
