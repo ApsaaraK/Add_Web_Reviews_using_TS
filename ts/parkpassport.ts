@@ -15,20 +15,43 @@ class Park {
     }
 }
 
+enum ImpressionType{
+    comment,
+    stars,
+
+}
+
+class impressionComment{
+    constructor(newComment:string){
+        this.comment=newComment
+    }
+
+    type=ImpressionType.comment
+    comment:string
+}
+
+class ImpressionStars{
+    constructor(newStars:number){
+        this.numStars=newStars
+    }
+    type=ImpressionType.stars
+    numStars:number
+}
+
 class Rating {
 
     public readonly venueId : string
     public readonly visitorName : string
-    public readonly impression : string
+    public readonly impression : impressionComment |ImpressionStars
 
-    constructor(newVenueId : string, newName : string, newImpression : string ) {
+    constructor(newVenueId : string, newName : string, newImpression : impressionComment | ImpressionStars ) {
         this.venueId = newVenueId
         this.visitorName = newName
         this.impression = newImpression
     }
 }
 
-// const stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"]
+const stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"]
 
 // variables -----------------------------------------------------
 
@@ -41,23 +64,26 @@ venueCatalogue.push(new Park("p005", "Acadia", "Highest rocky headlands along th
 venueCatalogue.push(new Park("p006", "Denali", "Solitude, tranquility and wilderness await.", "Alaska", "images/denali.jpg"))
 
 var ratings : Rating[] = []
-ratings.push(new Rating("p001", "Katie", "Best park ever!"))
-ratings.push(new Rating("p001", "Mike", "How did I not do this sooner?"))
-ratings.push(new Rating("p001", "Johan", "Classic, a must-see!"))
 
-ratings.push(new Rating("p002", "Katie", "Sensational! Book early in the summer!"))
-ratings.push(new Rating("p002", "Mike", "It was amazing!"))
-ratings.push(new Rating("p002", "Marianne", "Simply inspirational!"))
+ratings.push(new Rating("p001", "Katie", new impressionComment("Best park ever!")))
+ratings.push(new Rating("p001", "Mike", new impressionComment("How did I not do this sooner?")))
+ratings.push(new Rating("p001", "Johan", new impressionComment("Classic, a must-see!")))
+ratings.push(new Rating("p001", "Hector", new ImpressionStars(4)))
+ratings.push(new Rating("p001", "Vidya", new ImpressionStars(5)))
 
-// ratings.push(new Rating("p003", "Syd", 5))
-// ratings.push(new Rating("p003", "Peter", 3))
-// ratings.push(new Rating("p003", "X. Zheng", 4))
-ratings.push(new Rating("p003", "Han", "Felt like out of this world!"))
+ratings.push(new Rating("p002", "Katie", new impressionComment("Sensational! Book early in the summer!")))
+ratings.push(new Rating("p002", "Mike", new impressionComment("It was amazing!")))
+ratings.push(new Rating("p002", "Marianne", new impressionComment("Simply inspirational!")))
 
-ratings.push(new Rating("p004", "Jim", "How did I not do this sooner?"))
-ratings.push(new Rating("p004", "S. Patel", "Classic, a must-see!"))
-// ratings.push(new Rating("p004", "Gloria", 3))
-// ratings.push(new Rating("p004", "Samuel G.", 4))
+ratings.push(new Rating("p003", "Syd", new ImpressionStars(5)))
+ratings.push(new Rating("p003", "Peter", new ImpressionStars(3)))
+ratings.push(new Rating("p003", "X. Zheng", new ImpressionStars(4)))
+ratings.push(new Rating("p003", "Han", new impressionComment("Felt like out of this world!")))
+
+ratings.push(new Rating("p004", "Jim", new impressionComment("How did I not do this sooner?")))
+ratings.push(new Rating("p004", "S. Patel", new impressionComment("Classic, a must-see!")))
+ratings.push(new Rating("p004", "Gloria", new ImpressionStars(3)))
+ratings.push(new Rating("p004", "Samuel G.", new ImpressionStars(4)))
 
 // functions -----------------------------------------------------
 
@@ -75,8 +101,25 @@ function buildImpressionSectionFor(targetVenueId: string) : string {
         
         var entryHtml = ""
         
-        entryHtml = htmlTemplate.replace("~~impression~~", entry.impression)
+        switch(entry.impression.type){
+            case ImpressionType.comment:
+                entryHtml = htmlTemplate.replace("~~impression~~", (entry.impression as impressionComment).comment)
+                break
 
+            case ImpressionType.stars:
+
+                const StarsGiven = (entry.impression as ImpressionStars).numStars
+                if(StarsGiven>=1 && StarsGiven<=5){
+                    entryHtml = htmlTemplate.replace("~~impression~~", stars[StarsGiven - 1])
+                }
+                else{
+                    
+                }
+                break
+            
+            default:
+                throw new Error("Unknown Impression Type")
+    }
         entryHtml = entryHtml.replace("~~visitor-name~~", entry.visitorName)
         resultString += entryHtml
     })
