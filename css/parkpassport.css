@@ -1,0 +1,121 @@
+  body {
+    background-color: #6fa742;
+    overflow-x: hidden;
+  }
+  
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+    
+  .outer-div {
+    margin: auto;
+    max-width: 95%;
+    text-align: left;
+  }
+  
+  .page-frame {
+    margin-top: 2rem;
+    width: 95%;
+  }
+  
+  .park-description {
+    color: khaki;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    padding-bottom: 1.3rem;
+  }
+  
+  .park-image {
+    filter: drop-shadow(0.2rem 0.3rem 0.5rem #446644);
+    height: 8rem;
+    width: 8rem;
+    vertical-align: top;
+  }
+    
+  .park-location {
+    color: greenyellow;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .park-name {
+    color: rgb(239, 245, 244);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.7rem;
+    font-weight: bold;
+    line-height: 90%;
+    margin-bottom: 0.3rem;
+    margin-top: 0.1rem;
+  }
+  
+  .park-rating {
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+  }
+
+  .park-row {
+    border-bottom: #444444 1px solid;
+  }
+
+  .park-side {
+    padding-right: 2rem;
+    vertical-align: top;
+  }
+  
+  .park-table {
+    margin-bottom: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+  }
+  
+  .park-table, .park-table td {
+    border-collapse: collapse;
+  }
+  
+  .park-table th, .park-table td {
+    padding-bottom: 2.5rem;
+    padding-left: 2rem;
+    padding-top: 2.5rem;
+  }
+  
+  .reviews-heading {
+    color: yellow;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .reviews-hr {
+    border-color: #888888;
+    margin-left: 0;
+    margin-bottom: 1.3rem;
+    margin-top: 0;     
+    width: 35%; 
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  
+  @media only screen and (max-width: 900px) {
+  
+    .merchandise-description {
+      font-size: 0.7rem;
+    }
+  
+    .merchandise-image {
+      height: 7.5rem;
+      width: 7.5rem;
+    }
+  
+    .merchandise-name {
+      font-size: 1.7rem;
+    }
+  
+    .merchandise-unit-price {
+      font-size: 1.2rem;
+    }
+  }
+  
