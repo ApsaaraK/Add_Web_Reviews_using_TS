@@ -21,31 +21,39 @@ enum ImpressionType{
 
 }
 
-class impressionComment{
-    constructor(newComment:string){
-        this.comment=newComment
-    }
+class Impression<T>{
 
-    type=ImpressionType.comment
-    comment:string
+   constructor(newContent : T){
+
+   this.content=newContent
+   }
+   content: T
+   toString: ()=>string
 }
 
-class ImpressionStars{
-    constructor(newStars:number){
-        this.numStars=newStars
+class impressionComment extends Impression<string>{
+
+   toString =()=>{
+        return this.content
+   }
+}
+
+class ImpressionStars extends Impression<number>{
+
+    toString = () => {
+        let stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"]
+        if(this.content>=1 && this.content <=5){
+            return stars[this.content-1]
+        }
     }
-    type=ImpressionType.stars
-    numStars:number
 }
 
 class Rating {
 
-    public readonly venueId : string
     public readonly visitorName : string
     public readonly impression : impressionComment |ImpressionStars
 
-    constructor(newVenueId : string, newName : string, newImpression : impressionComment | ImpressionStars ) {
-        this.venueId = newVenueId
+    constructor(newName : string, newImpression : impressionComment | ImpressionStars ) {
         this.visitorName = newName
         this.impression = newImpression
     }
@@ -53,44 +61,97 @@ class Rating {
 
 const stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"]
 
+type ParkWithRating=[Park,Rating[]]
+
 // variables -----------------------------------------------------
 
-var venueCatalogue : Park[] = []
-venueCatalogue.push(new Park("p001", "Yosemite", "Home of the Half Dome and El Capitan.", "California", "images/yosemite.jpg"))
-venueCatalogue.push(new Park("p002", "Yellowstone", "The first national park of the United States.", "Wyoming", "images/yellowstone.jpg"))
-venueCatalogue.push(new Park("p003", "Volcano", "New lands in the making. Witness Mother Nature at work!", "Hawaii", "images/volcano.jpg"))
-venueCatalogue.push(new Park("p004", "Zion", "Follow the paths where ancient native people and pioneers walked.", "Utah", "images/zion.jpg"))
-venueCatalogue.push(new Park("p005", "Acadia", "Highest rocky headlands along the Atlantic coastline of the United States.", "Maine", "images/acadia.jpg"))
-venueCatalogue.push(new Park("p006", "Denali", "Solitude, tranquility and wilderness await.", "Alaska", "images/denali.jpg"))
+var venueCatalogue : ParkWithRating[] = []
 
-var ratings : Rating[] = []
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p001", "Yosemite", "Home of the Half Dome and El Capitan.", "California", "images/yosemite.jpg"),
 
-ratings.push(new Rating("p001", "Katie", new impressionComment("Best park ever!")))
-ratings.push(new Rating("p001", "Mike", new impressionComment("How did I not do this sooner?")))
-ratings.push(new Rating("p001", "Johan", new impressionComment("Classic, a must-see!")))
-ratings.push(new Rating("p001", "Hector", new ImpressionStars(4)))
-ratings.push(new Rating("p001", "Vidya", new ImpressionStars(5)))
+        // array of ratings
+        [
+            new Rating("Katie", new impressionComment("Best park ever!")),
+            new Rating("Mike", new impressionComment("How did I not do this sooner?")),
+            new Rating("Johan", new impressionComment("Classic, a must-see!")),
+            new Rating("Hector", new ImpressionStars(4)),
+            new Rating("Vidya", new ImpressionStars(5))
+        ]
+    ]
+)
 
-ratings.push(new Rating("p002", "Katie", new impressionComment("Sensational! Book early in the summer!")))
-ratings.push(new Rating("p002", "Mike", new impressionComment("It was amazing!")))
-ratings.push(new Rating("p002", "Marianne", new impressionComment("Simply inspirational!")))
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p002", "Yellowstone", "The first national park of the United States.", "Wyoming", "images/yellowstone.jpg"),
 
-ratings.push(new Rating("p003", "Syd", new ImpressionStars(5)))
-ratings.push(new Rating("p003", "Peter", new ImpressionStars(3)))
-ratings.push(new Rating("p003", "X. Zheng", new ImpressionStars(4)))
-ratings.push(new Rating("p003", "Han", new impressionComment("Felt like out of this world!")))
+        // array of ratings
+        [
+            new Rating("Katie", new impressionComment("Sensational! Book early in the summer!")),
+            new Rating("Mike", new impressionComment("It was amazing!")),
+            new Rating("Johan", new impressionComment("Simply inspirational!"))
+        ]
+    ]
+)
 
-ratings.push(new Rating("p004", "Jim", new impressionComment("How did I not do this sooner?")))
-ratings.push(new Rating("p004", "S. Patel", new impressionComment("Classic, a must-see!")))
-ratings.push(new Rating("p004", "Gloria", new ImpressionStars(3)))
-ratings.push(new Rating("p004", "Samuel G.", new ImpressionStars(4)))
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p003", "Volcano", "New lands in the making. Witness Mother Nature at work!", "Hawaii", "images/volcano.jpg"),
+
+        // array of ratings
+        [
+            new Rating("Syd", new ImpressionStars(5)),
+            new Rating("Peter", new ImpressionStars(3)),
+            new Rating("X. Zheng", new ImpressionStars(4)),
+            new Rating("Han", new impressionComment("Felt like out of this world!"))
+        ]
+    ]
+)
+
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p004", "Zion", "Follow the paths where ancient native people and pioneers walked.", "Utah", "images/zion.jpg"),
+
+        // array of ratings
+        [
+            new Rating("Jim", new impressionComment("How did I not do this sooner?")),
+            new Rating("S. Patel", new impressionComment("Classic, a must-see!")),
+            new Rating("Gloria", new ImpressionStars(3)),
+            new Rating("Samuel G.", new ImpressionStars(4))
+        ]
+    ]
+)
+
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p005", "Acadia", "Highest rocky headlands along the Atlantic coastline of the United States.", "Maine", "images/acadia.jpg"),
+
+        // array of ratings
+        []
+    ]
+)
+
+venueCatalogue.push(
+    //making a tupple
+    [
+        new Park("p006", "Denali", "Solitude, tranquility and wilderness await.", "Alaska", "images/denali.jpg"),
+
+        // array of ratings
+        []
+    ]
+)
+
 
 // functions -----------------------------------------------------
 
 
-function buildImpressionSectionFor(targetVenueId: string) : string {
-
-    const ratingsForVenue = ratings.filter(entry => entry.venueId == targetVenueId)
+function buildImpressionSectionFor(ratingsForVenue : Rating[]) : string {
 
     var resultString = ""
 
@@ -101,25 +162,7 @@ function buildImpressionSectionFor(targetVenueId: string) : string {
         
         var entryHtml = ""
         
-        switch(entry.impression.type){
-            case ImpressionType.comment:
-                entryHtml = htmlTemplate.replace("~~impression~~", (entry.impression as impressionComment).comment)
-                break
-
-            case ImpressionType.stars:
-
-                const StarsGiven = (entry.impression as ImpressionStars).numStars
-                if(StarsGiven>=1 && StarsGiven<=5){
-                    entryHtml = htmlTemplate.replace("~~impression~~", stars[StarsGiven - 1])
-                }
-                else{
-                    
-                }
-                break
-            
-            default:
-                throw new Error("Unknown Impression Type")
-    }
+        entryHtml = htmlTemplate.replace("~~impression~~",entry.impression.toString())
         entryHtml = entryHtml.replace("~~visitor-name~~", entry.visitorName)
         resultString += entryHtml
     })
@@ -154,11 +197,11 @@ function buildParkTable() {
 
         let rowHTML = htmlTemplate.replace("~~index~~", index.toString())
 
-        rowHTML = rowHTML.replace("~~image~~", park.image)
-        rowHTML = rowHTML.replace("~~name~~", park.name.toUpperCase())
-        rowHTML = rowHTML.replace("~~location~~", park.location)
-        rowHTML = rowHTML.replace("~~description~~", park.description)
-        rowHTML = rowHTML.replace("~~impression-section~~", buildImpressionSectionFor(park.id))
+        rowHTML = rowHTML.replace("~~image~~", park[0].image)
+        rowHTML = rowHTML.replace("~~name~~", park[0].name.toUpperCase())
+        rowHTML = rowHTML.replace("~~location~~", park[0].location)
+        rowHTML = rowHTML.replace("~~description~~", park[0].description)
+        rowHTML = rowHTML.replace("~~impression-section~~", buildImpressionSectionFor(park[1]))
 
         row.innerHTML = rowHTML
     })
