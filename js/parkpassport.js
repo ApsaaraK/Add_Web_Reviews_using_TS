@@ -12,45 +12,113 @@ class Park {
         this.image = image;
     }
 }
+var ImpressionType;
+(function (ImpressionType) {
+    ImpressionType[ImpressionType["comment"] = 0] = "comment";
+    ImpressionType[ImpressionType["stars"] = 1] = "stars";
+})(ImpressionType || (ImpressionType = {}));
+class Impression {
+    constructor(newContent) {
+        this.content = newContent;
+    }
+}
+class impressionComment extends Impression {
+    constructor() {
+        super(...arguments);
+        this.toString = () => {
+            return this.content;
+        };
+    }
+}
+class ImpressionStars extends Impression {
+    constructor() {
+        super(...arguments);
+        this.toString = () => {
+            let stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"];
+            if (this.content >= 1 && this.content <= 5) {
+                return stars[this.content - 1];
+            }
+        };
+    }
+}
 class Rating {
-    constructor(newVenueId, newName, newImpression) {
-        this.venueId = newVenueId;
+    constructor(newName, newImpression) {
         this.visitorName = newName;
         this.impression = newImpression;
     }
 }
-// const stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"]
+const stars = ["⭐️", "⭐️⭐️", "⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️", "⭐️⭐️⭐️⭐️⭐️"];
 // variables -----------------------------------------------------
 var venueCatalogue = [];
-venueCatalogue.push(new Park("p001", "Yosemite", "Home of the Half Dome and El Capitan.", "California", "images/yosemite.jpg"));
-venueCatalogue.push(new Park("p002", "Yellowstone", "The first national park of the United States.", "Wyoming", "images/yellowstone.jpg"));
-venueCatalogue.push(new Park("p003", "Volcano", "New lands in the making. Witness Mother Nature at work!", "Hawaii", "images/volcano.jpg"));
-venueCatalogue.push(new Park("p004", "Zion", "Follow the paths where ancient native people and pioneers walked.", "Utah", "images/zion.jpg"));
-venueCatalogue.push(new Park("p005", "Acadia", "Highest rocky headlands along the Atlantic coastline of the United States.", "Maine", "images/acadia.jpg"));
-venueCatalogue.push(new Park("p006", "Denali", "Solitude, tranquility and wilderness await.", "Alaska", "images/denali.jpg"));
-var ratings = [];
-ratings.push(new Rating("p001", "Katie", "Best park ever!"));
-ratings.push(new Rating("p001", "Mike", "How did I not do this sooner?"));
-ratings.push(new Rating("p001", "Johan", "Classic, a must-see!"));
-ratings.push(new Rating("p002", "Katie", "Sensational! Book early in the summer!"));
-ratings.push(new Rating("p002", "Mike", "It was amazing!"));
-ratings.push(new Rating("p002", "Marianne", "Simply inspirational!"));
-// ratings.push(new Rating("p003", "Syd", 5))
-// ratings.push(new Rating("p003", "Peter", 3))
-// ratings.push(new Rating("p003", "X. Zheng", 4))
-ratings.push(new Rating("p003", "Han", "Felt like out of this world!"));
-ratings.push(new Rating("p004", "Jim", "How did I not do this sooner?"));
-ratings.push(new Rating("p004", "S. Patel", "Classic, a must-see!"));
-// ratings.push(new Rating("p004", "Gloria", 3))
-// ratings.push(new Rating("p004", "Samuel G.", 4))
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p001", "Yosemite", "Home of the Half Dome and El Capitan.", "California", "images/yosemite.jpg"),
+    // array of ratings
+    [
+        new Rating("Katie", new impressionComment("Best park ever!")),
+        new Rating("Mike", new impressionComment("How did I not do this sooner?")),
+        new Rating("Johan", new impressionComment("Classic, a must-see!")),
+        new Rating("Hector", new ImpressionStars(4)),
+        new Rating("Vidya", new ImpressionStars(5))
+    ]
+]);
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p002", "Yellowstone", "The first national park of the United States.", "Wyoming", "images/yellowstone.jpg"),
+    // array of ratings
+    [
+        new Rating("Katie", new impressionComment("Sensational! Book early in the summer!")),
+        new Rating("Mike", new impressionComment("It was amazing!")),
+        new Rating("Johan", new impressionComment("Simply inspirational!"))
+    ]
+]);
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p003", "Volcano", "New lands in the making. Witness Mother Nature at work!", "Hawaii", "images/volcano.jpg"),
+    // array of ratings
+    [
+        new Rating("Syd", new ImpressionStars(5)),
+        new Rating("Peter", new ImpressionStars(3)),
+        new Rating("X. Zheng", new ImpressionStars(4)),
+        new Rating("Han", new impressionComment("Felt like out of this world!"))
+    ]
+]);
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p004", "Zion", "Follow the paths where ancient native people and pioneers walked.", "Utah", "images/zion.jpg"),
+    // array of ratings
+    [
+        new Rating("Jim", new impressionComment("How did I not do this sooner?")),
+        new Rating("S. Patel", new impressionComment("Classic, a must-see!")),
+        new Rating("Gloria", new ImpressionStars(3)),
+        new Rating("Samuel G.", new ImpressionStars(4))
+    ]
+]);
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p005", "Acadia", "Highest rocky headlands along the Atlantic coastline of the United States.", "Maine", "images/acadia.jpg"),
+    // array of ratings
+    []
+]);
+venueCatalogue.push(
+// make a new tuple
+[
+    new Park("p006", "Denali", "Solitude, tranquility and wilderness await.", "Alaska", "images/denali.jpg"),
+    // array of ratings
+    []
+]);
 // functions -----------------------------------------------------
-function buildImpressionSectionFor(targetVenueId) {
-    const ratingsForVenue = ratings.filter(entry => entry.venueId == targetVenueId);
+function buildImpressionSectionFor(ratingsForVenue) {
     var resultString = "";
     const htmlTemplate = `<p class="park-rating">~~impression~~ - ~~visitor-name~~</p>`;
     ratingsForVenue.forEach(entry => {
         var entryHtml = "";
-        entryHtml = htmlTemplate.replace("~~impression~~", entry.impression);
+        entryHtml = htmlTemplate.replace("~~impression~~", entry.impression.toString());
         entryHtml = entryHtml.replace("~~visitor-name~~", entry.visitorName);
         resultString += entryHtml;
     });
@@ -76,11 +144,11 @@ function buildParkTable() {
         let row = parkTable.insertRow(index);
         row.className = "park-row";
         let rowHTML = htmlTemplate.replace("~~index~~", index.toString());
-        rowHTML = rowHTML.replace("~~image~~", park.image);
-        rowHTML = rowHTML.replace("~~name~~", park.name.toUpperCase());
-        rowHTML = rowHTML.replace("~~location~~", park.location);
-        rowHTML = rowHTML.replace("~~description~~", park.description);
-        rowHTML = rowHTML.replace("~~impression-section~~", buildImpressionSectionFor(park.id));
+        rowHTML = rowHTML.replace("~~image~~", park[0].image);
+        rowHTML = rowHTML.replace("~~name~~", park[0].name.toUpperCase());
+        rowHTML = rowHTML.replace("~~location~~", park[0].location);
+        rowHTML = rowHTML.replace("~~description~~", park[0].description);
+        rowHTML = rowHTML.replace("~~impression-section~~", buildImpressionSectionFor(park[1]));
         row.innerHTML = rowHTML;
     });
 }
